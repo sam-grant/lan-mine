@@ -47,12 +47,22 @@ def scan_network():
         # --host-timeout: Timeout per host (helpful on macOS)
         # -n: No DNS resolution (much faster, especially on macOS)
         import platform
+        import os
+        
+        # Check if running with sufficient privileges
+        has_sudo = os.geteuid() == 0 if hasattr(os, 'geteuid') else True
+        
         cmd = ['nmap', '-sn', '-T4', '-n', '--host-timeout', '2s', network_range]
         
         # On macOS, use additional optimizations
         if platform.system() == 'Darwin':
             # Use fewer retries and shorter timeouts
             cmd.extend(['--min-parallelism', '100', '--max-retries', '1'])
+        
+        # If not running as root, add --unprivileged flag for limited scan
+        if not has_sudo:
+            cmd.insert(1, '--unprivileged')
+            print("Warning: Running without sudo - MAC addresses won't be detected")
         
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
         
@@ -101,7 +111,8 @@ def scan_network():
             'gateway': gateway,
             'local_ip': local_ip,
             'scan_time': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-            'total_devices': len(devices)
+            'total_devices': len(devices),
+            'has_sudo': has_sudo
         }
     
     except subprocess.TimeoutExpired:

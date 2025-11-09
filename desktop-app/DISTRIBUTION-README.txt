@@ -58,7 +58,11 @@ REQUIREMENTS
 
 • nmap (installed automatically by launcher or install.sh)
 • Modern web browser
-• sudo/administrator access for network scanning
+• sudo/administrator access (optional but recommended)
+
+Note: lan-mine works without sudo but with limited functionality:
+  ✓ With sudo: Full detection including MAC addresses and vendors
+  ⚠ Without sudo: IP addresses and hostnames only (no MAC/vendor info)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 TROUBLESHOOTING
@@ -71,13 +75,14 @@ Launcher won't run:
 Browser doesn't open:
 → Manually open http://localhost:5000
 
-Permission denied:
-→ Make sure you entered your password when prompted
-→ The app needs sudo to scan your network
+Don't have sudo access:
+→ lan-mine will run in limited mode automatically
+→ You'll see IP addresses and hostnames
+→ MAC addresses and vendor info won't be available
 
 Already extracted but want to run again:
 → Just double-click the launcher again
-→ Or run: sudo ./lan-mine from the extracted directory
+→ Or run: sudo ./lan-mine (or ./lan-mine without sudo)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 SECURITY NOTE

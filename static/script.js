@@ -98,6 +98,12 @@ async function startScan() {
             showError(data.error);
             logToTerminal(`Scan failed: ${data.error}`, 'error');
         } else {
+            // Check if running without sudo
+            if (data.has_sudo === false) {
+                logToTerminal('Warning: Running without sudo - MAC addresses unavailable', 'warning');
+                showWarning('Running without sudo access. MAC addresses and vendor info will not be detected. For full functionality, run with: sudo ./lan-mine');
+            }
+            
             displayResults(data);
             logToTerminal(`Scan completed in ${scanDuration}s`, 'success');
             logToTerminal(`Found ${data.total_devices} device(s) on network`, 'success');
@@ -175,7 +181,18 @@ function showError(message) {
     const errorDiv = document.getElementById('errorMessage');
     errorDiv.textContent = message;
     errorDiv.style.display = 'block';
+    errorDiv.style.background = 'rgba(255, 50, 50, 0.1)';
+    errorDiv.style.borderColor = 'rgb(255, 50, 50)';
     logToTerminal(`ERROR: ${message}`, 'error');
+}
+
+function showWarning(message) {
+    const errorDiv = document.getElementById('errorMessage');
+    errorDiv.textContent = '⚠ ' + message;
+    errorDiv.style.display = 'block';
+    errorDiv.style.background = 'rgba(255, 200, 0, 0.1)';
+    errorDiv.style.borderColor = 'rgb(255, 200, 0)';
+    errorDiv.style.color = 'rgb(255, 200, 0)';
 }
 
 function hideError() {
