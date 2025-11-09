@@ -8,29 +8,35 @@ For maintainers - How to share lan-mine with others
 LINUX DISTRIBUTION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Share these 3 files together:
-  1. packages/lan-mine-1.0.0-linux.tar.gz  (8.7MB - the app)
-  2. launch-linux.sh                       (2.7KB - launcher)
-  3. DISTRIBUTION-README.txt               (4.8KB - instructions)
+Share this single file:
+  📦 packages/lan-mine-1.0.0-linux-bundle.zip (8.7MB)
 
 Recipients:
-  • Place all files in the same folder
-  • Double-click launch-linux.sh
-  • Done!
+  1. Download and extract the zip
+  2. Double-click launch-linux.sh
+  3. Done!
+
+The bundle contains everything:
+  • launch-linux.sh (launcher script)
+  • lan-mine-1.0.0-linux.tar.gz (application)
+  • DISTRIBUTION-README.txt (instructions)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 MACOS DISTRIBUTION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Share these 3 files together:
-  1. packages/lan-mine-1.0.0-macos.tar.gz  (must build on Mac)
-  2. launch-macos.command                  (2.8KB - launcher)
-  3. DISTRIBUTION-README.txt               (4.8KB - instructions)
+Share this single file:
+  📦 packages/lan-mine-1.0.0-macos-bundle.zip (must build on Mac)
 
 Recipients:
-  • Place all files in the same folder
-  • Double-click launch-macos.command
-  • Done!
+  1. Download and extract the zip
+  2. Double-click launch-macos.command
+  3. Done!
+
+The bundle contains everything:
+  • launch-macos.command (launcher script)
+  • lan-mine-1.0.0-macos.tar.gz (application)
+  • DISTRIBUTION-README.txt (instructions)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 BUILDING MACOS PACKAGE
@@ -73,9 +79,9 @@ The extracted package includes its own README.txt with full docs.
 CURRENT STATUS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-✓ Linux package ready: packages/lan-mine-1.0.0-linux.tar.gz
-✓ Linux launcher ready: launch-linux.sh
-✓ macOS launcher ready: launch-macos.command
-✗ macOS package pending: needs Mac hardware to build
+✓ Linux bundle ready: packages/lan-mine-1.0.0-linux-bundle.zip
+✗ macOS bundle pending: needs Mac hardware to build
+
+All you need to share is the single zip file!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -182,25 +182,27 @@ cd desktop-app
 ./package.sh
 ```
 
-This creates a ready-to-distribute package:
-- **Linux**: `packages/lan-mine-1.0.0-linux.tar.gz`
-- **macOS**: `packages/lan-mine-1.0.0-macos.tar.gz` (must build on Mac)
+This creates ready-to-distribute bundles:
+- **Linux**: `packages/lan-mine-1.0.0-linux-bundle.zip`
+- **macOS**: `packages/lan-mine-1.0.0-macos-bundle.zip` (must build on Mac)
 
-Each package includes:
-- Standalone executable
-- Installation script (auto-installs nmap)
+Each bundle contains:
 - Clickable launcher script
+- Application package (standalone executable)
+- Installation script (auto-installs nmap)
 - Complete documentation
+
+Just share the single zip file!
 
 ### User installation (clickable)
 
-The easiest way for recipients to use lan-mine is with the launcher script:
+The easiest way for recipients to use lan-mine is with the distribution bundle:
 
-1. **Download the package and launcher**:
-   - Linux: `lan-mine-1.0.0-linux.tar.gz` + `launch-linux.sh`
-   - macOS: `lan-mine-1.0.0-macos.tar.gz` + `launch-macos.command`
+1. **Download the bundle**:
+   - Linux: `lan-mine-1.0.0-linux-bundle.zip`
+   - macOS: `lan-mine-1.0.0-macos-bundle.zip`
 
-2. **Place both files in the same directory**
+2. **Extract the zip file**
 
 3. **Double-click the launcher script**:
    - Linux: `launch-linux.sh`
@@ -210,6 +212,8 @@ The launcher automatically:
 - Extracts the package
 - Installs nmap if needed
 - Runs lan-mine with sudo
+
+Each bundle contains everything needed: the launcher, the app package, and instructions.
 
 ### User installation (manual)
 

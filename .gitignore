@@ -17,3 +17,5 @@ htmlcov/
 *.log
 .lan-mine.pid
 *.bak
+desktop-app/packages/
+desktop-app/test-*/

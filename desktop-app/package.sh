@@ -287,34 +287,66 @@ EOF
 fi
 
 # Create tarball
-echo -e "${CYAN}Creating archive...${NC}"
+echo -e "${CYAN}Creating tarball archive...${NC}"
 cd packages
 tar -czf "${PACKAGE_NAME}.tar.gz" "$PACKAGE_NAME"
 cd ..
 
-# Get file size
-SIZE=$(du -h "packages/${PACKAGE_NAME}.tar.gz" | cut -f1)
+# Create distribution zip with launcher and README
+echo -e "${CYAN}Creating distribution bundle...${NC}"
+DIST_NAME="lan-mine-${VERSION}-${PLATFORM}-bundle"
+DIST_DIR="packages/${DIST_NAME}"
+rm -rf "$DIST_DIR"
+mkdir -p "$DIST_DIR"
+
+# Copy files to distribution bundle
+cp "packages/${PACKAGE_NAME}.tar.gz" "$DIST_DIR/"
+cp "DISTRIBUTION-README.txt" "$DIST_DIR/"
+if [ "$PLATFORM" == "linux" ]; then
+    cp "launch-linux.sh" "$DIST_DIR/"
+else
+    cp "launch-macos.command" "$DIST_DIR/"
+fi
+
+# Create zip file
+cd packages
+zip -q -r "${DIST_NAME}.zip" "$DIST_NAME"
+cd ..
+
+# Get file sizes
+TAR_SIZE=$(du -h "packages/${PACKAGE_NAME}.tar.gz" | cut -f1)
+ZIP_SIZE=$(du -h "packages/${DIST_NAME}.zip" | cut -f1)
 
 echo ""
 echo -e "${GREEN}╔══════════════════════════════════════════╗${NC}"
-echo -e "${GREEN}║      Package Created Successfully!       ║${NC}"
+echo -e "${GREEN}║      Packages Created Successfully!      ║${NC}"
 echo -e "${GREEN}╚══════════════════════════════════════════╝${NC}"
 echo ""
-echo -e "${CYAN}Package:${NC} ${GREEN}packages/${PACKAGE_NAME}.tar.gz${NC}"
-echo -e "${CYAN}Size:${NC}    ${GREEN}${SIZE}${NC}"
+echo -e "${CYAN}Tarball:${NC}      ${GREEN}packages/${PACKAGE_NAME}.tar.gz${NC} (${TAR_SIZE})"
+echo -e "${CYAN}Bundle:${NC}       ${GREEN}packages/${DIST_NAME}.zip${NC} (${ZIP_SIZE})"
 echo ""
-echo -e "${CYAN}To distribute:${NC}"
-echo -e "  1. Share the package: ${GREEN}packages/${PACKAGE_NAME}.tar.gz${NC}"
+echo -e "${CYAN}╔══════════════════════════════════════════╗${NC}"
+echo -e "${CYAN}║ DISTRIBUTION BUNDLE (recommended)        ║${NC}"
+echo -e "${CYAN}╚══════════════════════════════════════════╝${NC}"
+echo ""
+echo -e "${GREEN}Share this single file:${NC}"
+echo -e "  📦 ${GREEN}packages/${DIST_NAME}.zip${NC}"
+echo ""
+echo -e "${CYAN}Recipients:${NC}"
+echo -e "  1. Download and extract the zip"
 if [ "$PLATFORM" == "linux" ]; then
-    echo -e "  2. Include launcher: ${GREEN}launch-linux.sh${NC}"
-    echo -e "  3. Users double-click: ${GREEN}launch-linux.sh${NC}"
+    echo -e "  2. Double-click ${GREEN}launch-linux.sh${NC}"
 else
-    echo -e "  2. Include launcher: ${GREEN}launch-macos.command${NC}"
-    echo -e "  3. Users double-click: ${GREEN}launch-macos.command${NC}"
+    echo -e "  2. Double-click ${GREEN}launch-macos.command${NC}"
 fi
+echo -e "  3. Done!"
 echo ""
-echo -e "${CYAN}The launcher script will:${NC}"
-echo -e "  • Extract the package"
-echo -e "  • Install nmap if needed"
-echo -e "  • Run lan-mine automatically"
+echo -e "${CYAN}The bundle contains:${NC}"
+if [ "$PLATFORM" == "linux" ]; then
+    echo -e "  • launch-linux.sh (launcher script)"
+else
+    echo -e "  • launch-macos.command (launcher script)"
+fi
+echo -e "  • ${PACKAGE_NAME}.tar.gz (application)"
+echo -e "  • DISTRIBUTION-README.txt (instructions)"
 echo ""
