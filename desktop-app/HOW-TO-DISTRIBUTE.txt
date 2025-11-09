@@ -1,0 +1,81 @@
+╔══════════════════════════════════════════════════════════════╗
+║              lan-mine Distribution Guide                     ║
+╚══════════════════════════════════════════════════════════════╝
+
+For maintainers - How to share lan-mine with others
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+LINUX DISTRIBUTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Share these 3 files together:
+  1. packages/lan-mine-1.0.0-linux.tar.gz  (8.7MB - the app)
+  2. launch-linux.sh                       (2.7KB - launcher)
+  3. DISTRIBUTION-README.txt               (4.8KB - instructions)
+
+Recipients:
+  • Place all files in the same folder
+  • Double-click launch-linux.sh
+  • Done!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+MACOS DISTRIBUTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Share these 3 files together:
+  1. packages/lan-mine-1.0.0-macos.tar.gz  (must build on Mac)
+  2. launch-macos.command                  (2.8KB - launcher)
+  3. DISTRIBUTION-README.txt               (4.8KB - instructions)
+
+Recipients:
+  • Place all files in the same folder
+  • Double-click launch-macos.command
+  • Done!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+BUILDING MACOS PACKAGE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+macOS packages must be built on a Mac:
+
+1. Copy entire desktop-app/ folder to a Mac
+2. cd desktop-app
+3. ./build.sh
+4. ./package.sh
+5. Copy packages/lan-mine-1.0.0-macos.tar.gz back
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WHAT THE LAUNCHER DOES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+When users double-click the launcher:
+  1. Finds the tar.gz package in the same directory
+  2. Extracts it automatically
+  3. Runs the install script (installs nmap if needed)
+  4. Starts lan-mine with sudo
+  5. Opens browser to http://localhost:5000
+
+No terminal knowledge required!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ALTERNATIVE: ADVANCED USERS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+If recipients prefer terminal:
+  $ tar -xzf lan-mine-1.0.0-linux.tar.gz
+  $ cd lan-mine-1.0.0-linux
+  $ ./install.sh
+  $ sudo ./lan-mine
+
+The extracted package includes its own README.txt with full docs.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CURRENT STATUS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✓ Linux package ready: packages/lan-mine-1.0.0-linux.tar.gz
+✓ Linux launcher ready: launch-linux.sh
+✓ macOS launcher ready: launch-macos.command
+✗ macOS package pending: needs Mac hardware to build
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

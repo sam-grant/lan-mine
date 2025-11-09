@@ -189,11 +189,31 @@ This creates a ready-to-distribute package:
 Each package includes:
 - Standalone executable
 - Installation script (auto-installs nmap)
+- Clickable launcher script
 - Complete documentation
 
-### User installation
+### User installation (clickable)
 
-Recipients simply:
+The easiest way for recipients to use lan-mine is with the launcher script:
+
+1. **Download the package and launcher**:
+   - Linux: `lan-mine-1.0.0-linux.tar.gz` + `launch-linux.sh`
+   - macOS: `lan-mine-1.0.0-macos.tar.gz` + `launch-macos.command`
+
+2. **Place both files in the same directory**
+
+3. **Double-click the launcher script**:
+   - Linux: `launch-linux.sh`
+   - macOS: `launch-macos.command`
+
+The launcher automatically:
+- Extracts the package
+- Installs nmap if needed
+- Runs lan-mine with sudo
+
+### User installation (manual)
+
+Or recipients can manually extract and run:
 ```bash
 tar -xzf lan-mine-1.0.0-linux.tar.gz
 cd lan-mine-1.0.0-linux

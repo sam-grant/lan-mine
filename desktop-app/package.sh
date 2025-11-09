@@ -44,6 +44,16 @@ echo -e "${CYAN}Copying executable...${NC}"
 cp dist/lan-mine "$PACKAGE_DIR/"
 chmod +x "$PACKAGE_DIR/lan-mine"
 
+# Copy appropriate launcher script
+echo -e "${CYAN}Copying launcher script...${NC}"
+if [ "$PLATFORM" == "linux" ]; then
+    cp launch-linux.sh "$PACKAGE_DIR/"
+    chmod +x "$PACKAGE_DIR/launch-linux.sh"
+else
+    cp launch-macos.command "$PACKAGE_DIR/"
+    chmod +x "$PACKAGE_DIR/launch-macos.command"
+fi
+
 # Create README
 echo -e "${CYAN}Creating README...${NC}"
 cat > "$PACKAGE_DIR/README.txt" << 'EOF'
@@ -294,8 +304,17 @@ echo -e "${CYAN}Package:${NC} ${GREEN}packages/${PACKAGE_NAME}.tar.gz${NC}"
 echo -e "${CYAN}Size:${NC}    ${GREEN}${SIZE}${NC}"
 echo ""
 echo -e "${CYAN}To distribute:${NC}"
-echo -e "  1. Share: ${GREEN}packages/${PACKAGE_NAME}.tar.gz${NC}"
-echo -e "  2. Users extract: ${GREEN}tar -xzf ${PACKAGE_NAME}.tar.gz${NC}"
-echo -e "  3. Users run: ${GREEN}cd ${PACKAGE_NAME} && ./install.sh${NC}"
-echo -e "  4. Users start: ${GREEN}sudo ./lan-mine${NC}"
+echo -e "  1. Share the package: ${GREEN}packages/${PACKAGE_NAME}.tar.gz${NC}"
+if [ "$PLATFORM" == "linux" ]; then
+    echo -e "  2. Include launcher: ${GREEN}launch-linux.sh${NC}"
+    echo -e "  3. Users double-click: ${GREEN}launch-linux.sh${NC}"
+else
+    echo -e "  2. Include launcher: ${GREEN}launch-macos.command${NC}"
+    echo -e "  3. Users double-click: ${GREEN}launch-macos.command${NC}"
+fi
+echo ""
+echo -e "${CYAN}The launcher script will:${NC}"
+echo -e "  • Extract the package"
+echo -e "  • Install nmap if needed"
+echo -e "  • Run lan-mine automatically"
 echo ""
