@@ -44,8 +44,17 @@ def scan_network():
         # Run nmap scan
         # -sn: Ping scan (no port scan)
         # -T4: Faster execution
-        cmd = ['nmap', '-sn', '-T4', network_range]
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+        # --host-timeout: Timeout per host (helpful on macOS)
+        # -n: No DNS resolution (much faster, especially on macOS)
+        import platform
+        cmd = ['nmap', '-sn', '-T4', '-n', '--host-timeout', '2s', network_range]
+        
+        # On macOS, use additional optimizations
+        if platform.system() == 'Darwin':
+            # Use fewer retries and shorter timeouts
+            cmd.extend(['--min-parallelism', '100', '--max-retries', '1'])
+        
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
         
         devices = []
         current_device = {}
