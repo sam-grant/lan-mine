@@ -44,11 +44,10 @@ if [ -d "$DIR_NAME" ]; then
         echo ""
         echo -e "${CYAN}Starting lan-mine...${NC}"
         echo ""
-        # Check sudo access and run appropriately
-        if sudo -n true 2>/dev/null || sudo -v 2>/dev/null; then
-            sudo ./lan-mine
-        else
-            echo -e "${YELLOW}⚠ No sudo access - running in limited mode${NC}"
+        # Try sudo, fall back if it fails
+        if ! sudo ./lan-mine; then
+            echo ""
+            echo -e "${YELLOW}⚠ Running in limited mode${NC}"
             ./lan-mine
         fi
         exit 0
@@ -93,28 +92,18 @@ echo -e "${CYAN}Your browser will open automatically${NC}"
 echo -e "${CYAN}If not, navigate to: ${GREEN}http://localhost:5000${NC}"
 echo ""
 
-# Check if user has sudo access
-if sudo -n true 2>/dev/null; then
-    # Can use sudo without password
-    echo -e "${GREEN}✓ Running with sudo (full functionality)${NC}"
-    echo -e "${YELLOW}Press Ctrl+C to stop lan-mine${NC}"
+# Try to run with sudo, fall back if it fails
+echo -e "${YELLOW}Press Ctrl+C to stop lan-mine${NC}"
+echo ""
+sleep 2
+
+# Attempt to run with sudo
+if ! sudo ./lan-mine; then
+    # sudo failed - fall back to running without sudo
     echo ""
-    sleep 2
-    sudo ./lan-mine
-elif sudo -v 2>/dev/null; then
-    # Prompted for password and succeeded
-    echo -e "${GREEN}✓ Running with sudo (full functionality)${NC}"
-    echo -e "${YELLOW}Press Ctrl+C to stop lan-mine${NC}"
-    echo ""
-    sleep 2
-    sudo ./lan-mine
-else
-    # No sudo access
-    echo -e "${YELLOW}⚠ No sudo access - running in limited mode${NC}"
+    echo -e "${YELLOW}⚠ Cannot run with sudo - running in limited mode${NC}"
     echo -e "${CYAN}MAC addresses and vendor info will not be available${NC}"
     echo -e "${CYAN}IP addresses and hostnames will still be detected${NC}"
-    echo ""
-    echo -e "${YELLOW}Press Ctrl+C to stop lan-mine${NC}"
     echo ""
     sleep 2
     ./lan-mine
