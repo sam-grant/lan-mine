@@ -66,11 +66,17 @@ def scan_network():
                 if current_device:
                     devices.append(current_device)
                 
-                hostname = ip_match.group(1) if ip_match.group(1) else 'Unknown'
                 ip = ip_match.group(2)
+                
+                # Do DNS lookup separately (faster than nmap's built-in)
+                try:
+                    hostname = socket.gethostbyaddr(ip)[0]
+                except (socket.herror, socket.gaierror, socket.timeout):
+                    hostname = 'Unknown'
+                
                 current_device = {
                     'ip': ip,
-                    'hostname': hostname.strip() if hostname else 'Unknown',
+                    'hostname': hostname,
                     'mac': 'N/A',
                     'vendor': 'N/A',
                     'is_gateway': ip == gateway,
