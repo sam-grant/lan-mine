@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lan-mine"
+version = "1.0.0"
+description = "A simple web-based LAN device scanner to monitor all devices on your local network"
+readme = "README.md"
+requires-python = ">=3.7"
+license = "MIT"
+authors = [
+    {name = "Sam"},
+]
+keywords = ["network", "scanner", "lan", "nmap", "device-discovery"]
+
+dependencies = [
+    "Flask>=3.0.0",
+    "netifaces>=0.11.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/sam/lan-mine"
+Repository = "https://github.com/sam/lan-mine"
+
+[tool.setuptools]
+py-modules = ["app"]

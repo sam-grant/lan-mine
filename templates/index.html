@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lan-mine</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌐 LAN-mine</h1>
+            <p class="subtitle">Network device scanner</p>
+        </header>
+
+        <div class="controls">
+            <button id="scanBtn" class="btn btn-primary">
+                <span class="btn-text">Scan Network</span>
+                <span class="spinner" style="display: none;">⟳</span>
+            </button>
+            <div class="network-info" id="networkInfo">
+                <span id="networkRange">Network: --</span>
+                <span id="gateway">Gateway: --</span>
+                <span id="localIP">Local IP: --</span>
+            </div>
+        </div>
+
+        <div class="stats" id="stats" style="display: none;">
+            <div class="stat-card">
+                <div class="stat-value" id="totalDevices">0</div>
+                <div class="stat-label">Devices found</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="scanTime">--</div>
+                <div class="stat-label">Last scan</div>
+            </div>
+        </div>
+
+        <div class="error-message" id="errorMessage" style="display: none;"></div>
+
+        <div class="terminal-section" id="terminalSection">
+            <div class="terminal-header">
+                <span>NETWORK ACTIVITY LOG</span>
+                <button id="clearLog" class="terminal-btn">CLEAR</button>
+            </div>
+            <div class="terminal-log" id="terminalLog">
+                <div class="log-entry system">[SYSTEM] lan-mine initialized...</div>
+            </div>
+        </div>
+
+        <div class="devices-section" id="devicesSection" style="display: none;">
+            <h2>Discovered devices</h2>
+            <div class="table-container">
+                <table id="devicesTable">
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>IP address</th>
+                            <th>Hostname</th>
+                            <th>MAC address</th>
+                            <th>Vendor</th>
+                        </tr>
+                    </thead>
+                    <tbody id="devicesBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <footer>
+            <p>Powered by nmap • Run with <code>sudo</code> for enhanced detection</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
