@@ -270,14 +270,15 @@ Potential features to add:
 - Export to CSV/JSON
 - Multiple network support
 
-## License
+<!-- ## License
 
-This project is open source and available under the MIT License.
+No license. All rights reserved.
 
 ## Contributing
 
 Feel free to fork, modify, and submit pull requests. All contributions are welcome.
-
+ -->
+ 
 ## Tips
 
 - Run the scanner periodically to keep track of new devices joining your network
