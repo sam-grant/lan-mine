@@ -21,6 +21,33 @@ fi
 
 PYTHON_VERSION=$(python3 --version | cut -d' ' -f2)
 echo -e "${CYAN}Python version: ${GREEN}${PYTHON_VERSION}${NC}"
+
+# Check for Python development headers (needed for netifaces compilation)
+if ! dpkg -s python3-dev >/dev/null 2>&1 && ! rpm -q python3-devel >/dev/null 2>&1; then
+    echo -e "${YELLOW}⚠ Python development headers not found${NC}"
+    echo -e "${CYAN}Installing python3-dev...${NC}"
+    
+    if command -v apt-get &> /dev/null; then
+        sudo apt-get update -qq && sudo apt-get install -y python3-dev gcc
+        if [ $? -ne 0 ]; then
+            echo -e "${RED}✗ Failed to install python3-dev${NC}"
+            echo -e "${YELLOW}Please run: ${CYAN}sudo apt-get install python3-dev gcc${NC}"
+            exit 1
+        fi
+    elif command -v yum &> /dev/null; then
+        sudo yum install -y python3-devel gcc
+    elif command -v pacman &> /dev/null; then
+        sudo pacman -S --noconfirm python gcc
+    else
+        echo -e "${RED}✗ Could not install python3-dev automatically${NC}"
+        echo -e "${YELLOW}Please install manually:${NC}"
+        echo -e "  Debian/Ubuntu/Raspberry Pi: ${CYAN}sudo apt-get install python3-dev gcc${NC}"
+        echo -e "  Fedora/RHEL:                ${CYAN}sudo yum install python3-devel gcc${NC}"
+        echo -e "  Arch:                       ${CYAN}sudo pacman -S python gcc${NC}"
+        exit 1
+    fi
+    echo -e "${GREEN}✓ Python development headers installed${NC}"
+fi
 echo ""
 
 # Check if venv already exists
