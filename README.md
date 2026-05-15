@@ -4,6 +4,8 @@ A simple, lightweight web-based tool to scan and monitor all devices on your loc
 ![LAN Scanner](https://img.shields.io/badge/Python-3.7+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
+Built with Claude Code. 
+
 ## Features
 
 - Quick network scanning - Discover all devices on your LAN in seconds
@@ -49,7 +51,8 @@ brew install nmap
 ### 1. Clone or download
 
 ```bash
-cd /home/sam/lan-mine
+git clone https://github.com/sam-grant/lan-mine.git
+cd lan-mine
 ```
 
 ### 2. Set up virtual environment (recommended)
